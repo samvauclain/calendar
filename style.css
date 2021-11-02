@@ -32,7 +32,7 @@ textarea{
 
 .row {
   white-space: pre-wrap;
-  height: 80px;
+  max-height: 80px;
   border-top: 1px solid white;
   margin-top:17px;
 }
@@ -65,9 +65,11 @@ textarea{
   background-color: #06AED5;
   color: white;
   text-align:center;
+  font-size:1rem;
 }
 
 .saveBtn i:hover {
-  font-size: 20px;
+  /* font-size: 20px; */
   transition: all .3s ease-in-out;
+  color:#77dd77;
 }
