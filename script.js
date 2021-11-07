@@ -6,28 +6,41 @@ var saveBtn = $('.saveBtn');
 
 currentDayEl.text(currentDay);
 
-// format current hour (example: 11)
-console.log("current hour:", moment().format("k"));
+// format current hour (example: 11 AM)
+var currentHour = moment().format('h A');
+// alert(currentHour);
 
-var calendarEntries = {};
+// var calendarEntries = {};
 
-// container
-/* <div class="row">
-<div class="col-2 col-md-1 hour">
-    <span></span>
-</div>
-<textarea class="col-8 col-md-10 past form-control"></textarea>
-<div class="col-2 col-md-1 saveBtn">
-  <p><i class="fas fa-save"></i></p>
-</div>
-</div> */
+// Dynamically create the calender rows & columns
+    for (var i = 9; i < 18; i++) {
+        // create elements for calendar entry              
+        var rowEl = $("<div></div>").addClass("row");
+        var timeColEl = $("<div></div>").addClass("col-2 col-md-1 hour pt-4");
 
-// On page load, dynamically create the calender rows & columns
-$(document).ready(function() {
-    // create elements for calendar entry              
-    var rowEl = $("<div></div>").addClass("row");
-    var colEl = $("<div></div>").addClass("col-2 col-md-1 hour");
-    colEl.append("<span></span>")
-    $(".container").append(rowEl, colEl);
-});
+        var currentCalendarHour = moment().hour(i).format('h A'); 
+        // currentCalendarHour = currentCalendarHour.duration().subtract(Number);
+
+        timeColEl.html(`<span>${currentCalendarHour}</span>`);
+        var entryColEl = $("<textarea></textarea>").addClass("col-8 col-md-10 form-control");
+        var saveColEl = $("<div></div>").addClass("col-2 col-md-1 saveBtn pt-4");
+
+        saveColEl.append('<p><i class="fas fa-save"></i></p>');
+        $(".container").append(rowEl);
+        rowEl.append(timeColEl, entryColEl, saveColEl); 
+
+        // check to see if hour has already past, is the current hour, or is in the future
+        if (currentHour > currentCalendarHour || i === 9) {
+            entryColEl.addClass("past");
+        }
+        else if (currentHour === currentCalendarHour || i === 9) {
+            entryColEl.toggleClass("past present");
+        }
+        else {
+            entryColEl.toggleClass("present future");
+        }
+    }
+
+
+
 
