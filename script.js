@@ -2,7 +2,7 @@ var currentDayEl = $("#currentDay");
 
 // grab current day "moment()" and display in this format using moment: Saturday, Nov 06, 2021
 var currentDay = moment().format("dddd, MMM DD, YYYY");
-var saveBtn = $('.saveBtn');
+// var saveBtn = $('.saveBtn');
 
 currentDayEl.text(currentDay);
 
@@ -10,22 +10,31 @@ currentDayEl.text(currentDay);
 var currentHour = moment().format('h A');
 // alert(currentHour);
 
-// var calendarEntries = {};
+var events =[];
+// var storedEvents = '';
 
 // Dynamically create the calender rows & columns
     for (var i = 9; i < 18; i++) {
+
         // create elements for calendar entry              
-        var rowEl = $("<div></div>").addClass("row");
-        var timeColEl = $("<div></div>").addClass("col-2 col-md-1 hour pt-4");
+        var rowEl = $(`<div></div>`).addClass("row");
+        var timeColEl = $(`<div id="hour-col-${i}"></div>`).addClass("pt-4 col-2 col-md-1 hour");
 
         var currentCalendarHour = moment().hour(i).format('h A'); 
         // currentCalendarHour = currentCalendarHour.duration().subtract(Number);
 
-        timeColEl.html(`<span>${currentCalendarHour}</span>`);
-        var entryColEl = $("<textarea></textarea>").addClass("col-8 col-md-10 form-control");
-        var saveColEl = $("<div></div>").addClass("col-2 col-md-1 saveBtn pt-4");
+        timeColEl.html(currentCalendarHour);
+        var entryColEl = $(`<textarea id="eventText-${i}"></textarea>`).addClass("col-8 col-md-10 form-control");
+        var saveColEl = $(`<div id="btn-${i}"></div>`).addClass("pt-4 col-2 col-md-1 saveBtn");
 
-        saveColEl.append('<p><i class="fas fa-save"></i></p>');
+        saveColEl.append(`<i class="fas fa-save"><button></button></i>`).click(function () {
+            // alert("click");
+                var time = $(this).siblings().attr("id");
+                var text = $(this).siblings(".form-control").val();
+                localStorage.setItem(time, text);
+                console.log(localStorage);
+          });
+        
         $(".container").append(rowEl);
         rowEl.append(timeColEl, entryColEl, saveColEl); 
 
@@ -40,7 +49,4 @@ var currentHour = moment().format('h A');
             entryColEl.toggleClass("present future");
         }
     }
-
-
-
 
