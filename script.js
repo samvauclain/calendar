@@ -26,18 +26,18 @@ var events =[];
         timeColEl.html(currentCalendarHour);
         var entryColEl = $(`<textarea id="eventText-${i}"></textarea>`).addClass("col-8 col-md-10 form-control");
         var saveColEl = $(`<div id="btn-${i}"></div>`).addClass("pt-4 col-2 col-md-1 saveBtn");
-
         saveColEl.append(`<i class="fas fa-save"><button></button></i>`).click(function () {
             // alert("click");
-                var time = $(this).siblings().attr("id");
-                var text = $(this).siblings(".form-control").val();
-                localStorage.setItem(time, text);
-                console.log(localStorage);
-          });
+            var time = $(this).siblings().attr("id");
+            var text = $(this).siblings(".form-control").val();
+            localStorage.setItem(time, text);
+            console.log(localStorage);
+        });
         
         $(".container").append(rowEl);
         rowEl.append(timeColEl, entryColEl, saveColEl); 
-
+        $(`#eventText-${i}`).val(localStorage.getItem(`hour-col-${i}`));
+        
         // check to see if hour has already past, is the current hour, or is in the future
         if (currentHour > currentCalendarHour || i === 9) {
             entryColEl.addClass("past");
@@ -50,3 +50,4 @@ var events =[];
         }
     }
 
+    
