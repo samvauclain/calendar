@@ -1,4 +1,4 @@
-# Work Day Scheduler Starter Code
+# Work Day Scheduler
 
 Published page: https://samvauclain.github.io/calendar/
 
