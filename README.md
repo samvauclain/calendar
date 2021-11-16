@@ -1,5 +1,10 @@
 # Work Day Scheduler Starter Code
 
+Published page: https://samvauclain.github.io/calendar/
+
+Screenshot:
+<img src="./assets/img/calendar.png" alt="screenshot of calendar app">
+
 AS AN employee with a busy schedule
 
 I WANT to add important events to a daily planner
